@@ -57,6 +57,10 @@ done
 # construct footer
 cat $PWD/footer.html >> $WEB_OUTPUT
 
+# remove artifacts
+
+
+
 echo 'Generation complete. Starting nginx.'
 
 nginx -g "daemon off;"

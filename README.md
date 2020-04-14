@@ -15,7 +15,7 @@ spec:
   schedule: '@hourly'
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 3600
+      activeDeadlineSeconds: 3630
       template:
         metadata:
           labels:

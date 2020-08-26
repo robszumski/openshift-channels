@@ -11,6 +11,7 @@ parse_channel() {
 	FILE=$1
 	NAME=$(./yq r $FILE name)
 	VERSIONS=$(./yq r $FILE versions) # grab it all, including comments
+	VERSIONS=$(echo "${VERSIONS}" | grep -v 'hotfix')
 	HTML_OUT="html/$NAME.html"
 	LAST_MODIFIED=$(cd $CINI_GRAPH_DIR && git log -1 --format="%ad" -- $FILE)
 
@@ -22,7 +23,7 @@ parse_channel() {
 	echo "  <div class='name'>$NAME</div>" >> $HTML_OUT
 
 	# find latest version
-	CURRENT=$(./yq r $FILE versions | grep -v "#" | tail -n1 | sed 's/- //') #ignore comments, find last entry
+	CURRENT=$(echo "${VERSIONS}" | grep -v "#" | tail -n1 | sed 's/- //') #ignore comments, find last entry
 	if [ $CURRENT == '[]' ]; then
 		echo "  <div class='current muted'>No release</div>" >> $HTML_OUT
 	else 
